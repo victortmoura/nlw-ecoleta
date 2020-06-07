@@ -1,0 +1,94 @@
+* PROJETO DA NLW
+
+1. Foram instalados os seguintes softwares:
+	1.1 chocolatey
+	1.2 node.js
+	1.3 vscode
+
+2. Criei a pasta "nlw" dentro do diretório 'C' e uma subpasta "server". Nessa pasta, executamos o seguinte comando: "npm init -y". Esse comando serve para o NODE definir informações do projeto (nome, versão, descrição) como DEFAULT.
+
+3. PS: No Windows, existe o comando "code ." que se você rodar no diretório do projeto, ele irá abrir o VSCODE no projeto escolhido.
+
+4. "package.json" arquivo que compõe as informações e dependências do projeto.
+
+5. Foi Instalado um micro framework para lidar com ROTAS mediante o seguinte comando: "npm install express".
+
+6. Criou-se a pasta "src" e dentro dela o nosso 1º arquivo: "server.ts".
+
+7. Codamos o primeira linha da classe: import express from 'express' e notou-se que havia "3 pontinhos" bem no início da palavra [from '...express']. 
+Isso quer dizer que, essa biblioteca não leva em consideração a TIPAGEM do TypeScript, enquanto que outras levam sim. O próprio "quick fix" do VSCODE nos dá uma sugestão de como resolver o problema, executando o seguinte script no terminal: "npm install @types/express" porém, precisamos colocaro  '-D' no final do script, ficando da seguinte forma "npm install @types/express -D". 
+Quando nossa aplicação for ao ar, nosso código TS vai ser transformado em JS e não irá precisar de tipagem.
+
+8. Se tentarmos executar o nosso arquivo TS no terminal, não irá funcionar, pois o NODE só entende JS. Para isso, precisaremos executar um novo script no terminal: "npm install ts-node"
+
+** IMPORTANTE -------------------------------------------------------------
+9. Ao tentar executar o comando "npx ts-node src/server.ts" (coomando 'npx' serve para executar os arquivos bin (binários)).
+---------------------------------------------------------------------------
+
+10. Toda vez que criamos um projeto TS, a gente precisa de um arquivo de configurações do TS, que define quais features a gente quer utilizar e quais a gente não quer. Esse arquivo é o "tsconfig.json" que é gerado mediante a execução do seguinte script: "npx tsc --init".
+
+11. Também instalamos a dependência "npm install ts-node-dev", diferente da dependência "npm install ts-node", a DEV irá ficar de "olho" no nosso código e, quando sofrer alguma alteração, vai subir rapidamente a alteração pro servidor para ser testada.
+
+* SUBIR SERVIDOR
+12. Foi criado um script para subir um servidor em NODE no arquivo "package.json" que possui o seguinte par chave/valor: 
+
+"scripts": {
+    "dev": "npx ts-node-dev src/server.ts"    
+  }
+
+Para utilizá-lo, rode o seguinte comando: 'npm run dev'
+
+13. CONSTRUÇÃO DO BD 
+	13.1 roda o script 'npm run knex:migrate' para montar as tabelas
+	13.2 roda o script 'npm run knex:seed' para popular a tabela de item (pois, desejou-se que, ao instanciar o BD, algumas tabelas viessem populadas, logo, apenas a tabela de ITEM que possui um arquivo dentro da pasta "database/seeds/create_item.ts" que vai sofrer esse processo de já vir populada.
+
+
+
+14. CORS: Define quais URLs WEBs vão ter acesso a nossa API.
+	14.1 primeiro passo: 'npm install cors'
+	14.2 importar a dependência no arquivo 'server.ts'. OBS: será constatado o mesmo errou que foi visto no ponto (7) deste documento, logo, conserta-se da mesma maneira.
+	14.3 colocar o método cors() dentro do app: app.use(cors()) - vai permitir que todas as URLs acessem a nossa API.
+	14.4  "app.use(cors())" deve vir antes da linha app.use(routes) pra garantir que todos as URLs WEBs possam acessar a API.
+
+15. Importante rever o minuto 01:10:00 ~ 01:20:00 por se tratar de conceitos importantes do React: useEffect & useState
+
+	15.1 Sempre que anotar um ESTADO pra um array ou objeto, a gente precisa manualmente informar o tipo da variável que vai ser armazenada ali dentro.
+
+	15.2 "Warning: Each child in a list should have a unique "key" prop.": sempre que a gente faz um map() no react (uma iteração que percorre um array e retorna uma coisa), o 1º elemento desse retorno precisa ter uma propriedade obrigatória chamada "key". Isso serve pro react encontrar esse elemento de uma forma mais rápida. O valor dessa key (value) deve ser o valor único (id) que a gente tem no item do array.
+
+16. "items.map()" me permite percorrer todos os itens de dentro de um array.
+
+
+------------------------------------------------------------------------
+REACT:
+
+1. index.tsx: primeiro arquivo carregado pela aplicação
+
+2. npm install axios: instalada a biblioteca que nos permite fazer requisições ao nosso backe-end NODE, pra nossas ou quaisquer API Rest.
+
+
+------------------------------------------------------------------------
+MOBILE:
+
+1. instalar o expo: npm install -g expo-cli
+
+2. tag sem conteúdo: <> </> - chamada de fragment. É uma div que não produz resultado no final das contas.
+
+3. Sempre que a função receber um parâmetro, eu coloco uma "arrow function".
+ex: onPress={() => handleNavigateToDetail(point.id)}
+
+
+
+
+
+------------------------------------------------------------------------------
+* comentário aluno:
+TODOS os backends devem conter as seguintes dependencias no projeto server (backend NODEJS):
+
+npx com o NPM instalamos assim: npm install npx
+@types/express  com o NPM instalamos assim: npm install @types/express -D
+ts-node  com o NPM instalamos assim: npm install ts-node -D 
+ts-node-dev com o NPM instalamos assim: npm install ts-node-dev -D 
+typescript com o NPM instalamos assim:  npx tsc --init  caso não funcione, execute assim ->  npx typescript --init
+
+A maioria dos comandos acima contém o -D  (lê-se -> menos dê) no final do comando, conforme orientado pelo Diego na aula de hoje, o -D  serve para utilizarmos algumas dependências apenas em ambiente de desenvolvimento.
