@@ -1,5 +1,5 @@
 # Ecoleta
-![](./images/logo.png)
+
 <img src="./images/logo.png" style="width: 30%;margin: auto;"> 
 <h4 align="center">
 Preserve o meio ambiente, Recicle !
